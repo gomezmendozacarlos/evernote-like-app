@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { app, database } from "../../../../../firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+
+const dbInstance = collection(database, "notes");
 
 export default function NoteDetails({ ID }) {
   const [singleNote, setSingleNote] = useState({});
-
+  
   const getSingleNote = async () => {
     if (ID) {
       const singleNote = doc(database, "notes", ID);
@@ -13,10 +15,24 @@ export default function NoteDetails({ ID }) {
       setSingleNote({ ...data.data(), id: data.id });
     }
   };
+  
+  const getNotes = () => {
+    getDocs(dbInstance).then((data) => {
+      setSingleNote(
+        data.docs.map((item) => {
+          return { ...item.data(), id: item.id };
+        })[0]
+      );
+    });
+  };
 
   useEffect(() => {
     getSingleNote();
   }, [ID]);
+
+  useEffect(() => {
+    getNotes();
+  }, []);
 
   return (
     <>
