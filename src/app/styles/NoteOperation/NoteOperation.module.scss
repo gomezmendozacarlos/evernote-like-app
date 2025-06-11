@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+$dark-red: rgb(119, 27, 27);
+$black: black;
+$whiteSmoke: whiteSmoke;
+$gray: gray;
+$blue: #3B57E1;
+
 .button {
     width: 15rem;
     height: 2rem;
     cursor: pointer;
-    background-color: #3B57E1;
+    background-color: $blue;
     color: whitesmoke;
-    border: rgb(54, 138, 217);
+    border: $blue;
     font-family: 'Roboto';
 }
 
@@ -23,9 +29,9 @@
     width: 15rem;
     height: 2rem;
     cursor: pointer;
-    background-color: rgb(119, 27, 27);
+    background-color: $dark-red;
     color: whitesmoke;
-    border: rgb(119, 27, 27);
+    border: $dark-red;
     font-family: 'Roboto';
 }
 
