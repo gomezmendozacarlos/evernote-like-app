@@ -1,19 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { app, database } from "../../../../../firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import styles from "@/app/styles/NoteOperation/NoteOperation.module.scss";
 import ClientOnlyQuillEditor from "../../components/QuillEditor/";
 
 const NoteOperations = () => {
   const [isInputVisible, setInputVisible] = useState(false);
-  const [noteTitle, setNoteTitle] = useState("");
-  const [noteDesc, setNoteDesc] = useState("");
 
   const dbInstance = collection(database, "notes");
+  const [noteTitle, setNoteTitle] = useState("");
+  const [noteDesc, setNoteDesc] = useState("");
+  const [notesArray, setNotesArray] = useState([]);
+
+  useEffect(() => {
+    getNotes();
+  }, []);
 
   const inputToggle = () => {
     setInputVisible(!isInputVisible);
+  };
+
+  const getNotes = () => {
+    getDocs(dbInstance).then((data) => {
+      setNotesArray(
+        data.docs.map((item) => {
+          return { ...item.data(), id: item.id };
+        })
+      );
+    });
   };
 
   const saveNote = () => {
@@ -21,9 +36,9 @@ const NoteOperations = () => {
       noteTitle: noteTitle,
       noteDesc: noteDesc,
     }).then(() => {
-      alert("itos")
       setNoteTitle("");
       setNoteDesc("");
+      getNotes();
     });
   };
 
@@ -54,6 +69,16 @@ const NoteOperations = () => {
       ) : (
         <></>
       )}
+      <div className={styles.notesDisplay}>
+        {notesArray.map((note) => {
+          return (
+            <div className={styles.notesInner} key={note.id}>
+              <h4>{note.noteTitle}</h4>
+              <div dangerouslySetInnerHTML={{ __html: note.noteDesc }}></div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
