@@ -1,5 +1,6 @@
 import NoteOperations from "@/app/pages/components/NoteOperations";
 import styles from "@/app/styles/Evernote/Evernote.module.scss";
+import 'react-quill/dist/quill.snow.css';
 import Head from "next/head";
 
 export default function Home() {

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { app, database } from "../../../../../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import styles from "@/app/styles/NoteOperation/NoteOperation.module.scss";
+import ClientOnlyQuillEditor from "../../components/QuillEditor/";
 
 const NoteOperations = () => {
   const [isInputVisible, setInputVisible] = useState(false);
@@ -38,6 +39,12 @@ const NoteOperations = () => {
             placeholder="Enter the Title.."
             onChange={(e) => setNoteTitle(e.target.value)}
           />
+          <div className={styles.ReactQuill}>
+            <ClientOnlyQuillEditor
+              value={editorContent}
+              onChange={setEditorContent}
+            />
+          </div>
           <button onClick={saveNote} className={styles.saveBtn}>
             Save Note
           </button>
