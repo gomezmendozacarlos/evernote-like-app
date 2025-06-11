@@ -9,7 +9,6 @@ const NoteOperations = () => {
   const [isInputVisible, setInputVisible] = useState(false);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteDesc, setNoteDesc] = useState("");
-  const [editorContent, setEditorContent] = useState("");
 
   const dbInstance = collection(database, "notes");
 
@@ -20,9 +19,10 @@ const NoteOperations = () => {
   const saveNote = () => {
     addDoc(dbInstance, {
       noteTitle: noteTitle,
+      noteDesc: noteDesc
     });
   };
-
+3
   const addDesc = (value) => {
     setNoteDesc(value);
   };
@@ -41,8 +41,7 @@ const NoteOperations = () => {
           />
           <div className={styles.ReactQuill}>
             <ClientOnlyQuillEditor
-              value={editorContent}
-              onChange={setEditorContent}
+              onChange={addDesc}
             />
           </div>
           <button onClick={saveNote} className={styles.saveBtn}>
