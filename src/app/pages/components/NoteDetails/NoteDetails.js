@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { app, database } from "../../../../../firebaseConfig";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import styles from "../../../styles/NoteDetails/NoteDetails.module.scss";
 
 const dbInstance = collection(database, "notes");
 
@@ -36,6 +37,10 @@ export default function NoteDetails({ ID }) {
 
   return (
     <>
+    <div>
+   <button className={styles.editBtn}>Edit</button>
+<button className={styles.deleteBtn}>Delete</button>
+ </div>
       <h2>{singleNote.noteTitle}</h2>
       <div dangerouslySetInnerHTML={{ __html: singleNote.noteDesc }}></div>
     </>
