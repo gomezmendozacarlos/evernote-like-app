@@ -5,7 +5,7 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import styles from "@/app/styles/NoteOperation/NoteOperation.module.scss";
 import ClientOnlyQuillEditor from "../../components/QuillEditor/";
 
-const NoteOperations = () => {
+const NoteOperations = ({ getSingleNote }) => {
   const [isInputVisible, setInputVisible] = useState(false);
 
   const dbInstance = collection(database, "notes");
@@ -72,9 +72,12 @@ const NoteOperations = () => {
       <div className={styles.notesDisplay}>
         {notesArray.map((note) => {
           return (
-            <div className={styles.notesInner} key={note.id}>
+            <div
+              onClick={() => getSingleNote(note.id)}
+              className={styles.notesInner}
+              key={note.id}
+            >
               <h4>{note.noteTitle}</h4>
-              <div dangerouslySetInnerHTML={{ __html: note.noteDesc }}></div>
             </div>
           );
         })}
