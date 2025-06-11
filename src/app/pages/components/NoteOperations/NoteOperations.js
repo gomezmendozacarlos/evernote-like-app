@@ -19,10 +19,14 @@ const NoteOperations = () => {
   const saveNote = () => {
     addDoc(dbInstance, {
       noteTitle: noteTitle,
-      noteDesc: noteDesc
+      noteDesc: noteDesc,
+    }).then(() => {
+      alert("itos")
+      setNoteTitle("");
+      setNoteDesc("");
     });
   };
-3
+
   const addDesc = (value) => {
     setNoteDesc(value);
   };
@@ -38,11 +42,10 @@ const NoteOperations = () => {
             className={styles.input}
             placeholder="Enter the Title.."
             onChange={(e) => setNoteTitle(e.target.value)}
+            value={noteTitle}
           />
           <div className={styles.ReactQuill}>
-            <ClientOnlyQuillEditor
-              onChange={addDesc}
-            />
+            <ClientOnlyQuillEditor onChange={addDesc} value={noteDesc} />
           </div>
           <button onClick={saveNote} className={styles.saveBtn}>
             Save Note

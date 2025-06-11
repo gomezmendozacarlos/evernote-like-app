@@ -35,7 +35,7 @@ const formats = [
   "image",
 ];
 
-const ClientOnlyQuillEditor = ({onChange}) => {
+const ClientOnlyQuillEditor = ({onChange, value}) => {
   return (
     <div className="max-w-[1000px] mx-auto mt-10">
       <ReactQuill
@@ -44,6 +44,7 @@ const ClientOnlyQuillEditor = ({onChange}) => {
         formats={formats}
         placeholder="Write something awesome..."
         onChange={onChange}
+        value={value}
       />
     </div>
   );
