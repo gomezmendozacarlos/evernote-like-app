@@ -4,7 +4,7 @@ import Head from "next/head";
 import NoteOperations from "@/app/pages/components/NoteOperations";
 import NoteDetails from "@/app/pages/components/NoteDetails";
 import styles from "@/app/styles/Evernote/Evernote.module.scss";
-import "react-quill/dist/quill.snow.css";
+import "react-quill-new/dist/quill.snow.css";
 import "@/app/globals.css";
 
 export default function Home() {
